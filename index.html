@@ -1,8 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="MobileOptimized" content="176" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="robots" content="noindex,nofollow" />
+    <script src="https://telegram.org/js/telegram-web-app.js?2"></script>
+    <script>
+        function setThemeClass() {
+            document.documentElement.className = Telegram.WebApp.colorScheme;
+        }
+
+        Telegram.WebApp.onEvent('themeChanged', setThemeClass);
+        setThemeClass();
+
+    </script>
+
+
+
     <title>DraCoin Mini App</title>
     <style>
         /* General Styles */
@@ -635,16 +653,19 @@
         const adButton = document.getElementById('ad');
         adButton.addEventListener('click', () => {
             AdController.show().then((result) => {
-                alert('You earned 1,000 DraCoin!');
+                var message='You earned 1,000 DraCoin!';
+                Telegram.WebApp.showAlert(message);
             }).catch((result) => {
-                alert('Ad was not completed.');
+                var message='Ad was not completed.';
+                Telegram.WebApp.showAlert(message);
             });
         });
 
         function copyInviteLink() {
             const inviteLink = "https://example.com/invite";
             navigator.clipboard.writeText(inviteLink).then(() => {
-                alert('Invite link copied to clipboard!');
+                var message='Invite link copied to clipboard!';
+                Telegram.WebApp.showAlert(message);
             }).catch(() => {
                 alert('Failed to copy invite link.');
             });
@@ -655,7 +676,8 @@
             if (window.Telegram && window.Telegram.WebApp) {
                 window.Telegram.WebApp.shareText(inviteLink);
             } else {
-                alert('Sharing is not supported in this environment.');
+                var message='Sharing is not supported in this environment.';
+                alert(message);
             }
         }
 
